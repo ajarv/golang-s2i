@@ -37,10 +37,21 @@ The application, which consists of a simple static web page, should now be acces
 
 #### Create the builder image
 The following command will create a builder image named golang-centos7.
+
 ```
 $ oc new-build https://github.com/nmasse-itix/golang-s2i.git --name=golang-centos7
 $ oc logs -f bc/golang-centos7
 ```
+
+OR
+
+```
+$ oc login -u admin..
+$ oc project openshift
+$ oc new-build https://github.com/nmasse-itix/golang-s2i.git --name=golang-centos7 --build-arg=GOLANG_VERSION=1.10.4
+$ oc logs -f bc/golang-centos7
+```
+
 
 #### Creating and running the application image
 The application image combines the builder image with your applications source code, which is served using whatever application is installed via the *Dockerfile*, compiled using the *assemble* script, and run using the *run* script.
